@@ -1,0 +1,33 @@
+/* ==========================================================================
+   tvOS Deck – Schrift
+   SF Pro wird bevorzugt, falls sie auf dem Deck installiert ist
+   (~/.local/share/fonts). Sonst wird die mitgelieferte, frei lizenzierte
+   „Inter“ (SIL OFL) genutzt – optisch die nächste Alternative zu SF Pro.
+   Zwei Pfade, damit es auch funktioniert, wenn der Ordner „tvOS Deck“ heißt.
+   ========================================================================== */
+
+@font-face {
+  font-family: "tvOS Inter";
+  src: url("/themes_custom/tvOS-Deck/fonts/InterVariable.woff2") format("woff2"),
+    url("/themes_custom/tvOS%20Deck/fonts/InterVariable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+html,
+body,
+body * {
+  font-family: var(--tvdeck-font) !important;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Zahlen in Uhr, Akku und Downloads nicht „springen“ lassen */
+.header_Clock,
+.header_Percentage,
+.gamepadslider_DescriptionValue,
+.quickaccesscontrols_BatteryPercentageLabel {
+  font-variant-numeric: tabular-nums;
+}

@@ -1,0 +1,217 @@
+/* ==========================================================================
+   tvOS Deck – Hauptmenü (Steam-Taste) – nur im Fenster „MainMenu“
+   Vorbild: die schwebende Seitenleiste der Apple-TV-App.
+
+   Wichtig: Für die Menüeinträge nutzen wir role-Attribute statt Klassen.
+   Steam enthält zwei Menü-Module; die CSS-Loader-Übersetzung zeigt bei
+   Item/ItemOuter/ItemIcon/ItemLabel/Active/Collapsed auf das falsche.
+   Struktur: .mainmenu_Menu[role=menu] > div(ItemOuter) > [role=menuitem]
+             > [Aktiv-Punkt (style 50%)] + Icon-div + Label (Marquee)
+   Einzelne Klassen-Hashes stehen in einfachen Anführungszeichen, damit
+   CSS Loader sie nicht „übersetzt“ (Stand Steam-Build 21.10.2026).
+   ========================================================================== */
+
+/* Das Menü-Fenster liegt über dem Spiel/der Oberfläche: kein echter Blur
+   möglich, daher dichtes Glas mit feinem Glanz. */
+.mainmenu_Menu {
+  width: 222px;
+  margin-left: 10px;
+  padding: 10px 0;
+  box-sizing: border-box;
+  background: var(--tvdeck-glass-sheen), var(--tvdeck-glass-solid) !important;
+  border-radius: var(--tvdeck-r-xl);
+  box-shadow: var(--tvdeck-panel-shadow), var(--tvdeck-glass-edge);
+}
+
+/* Eingeklappt (im Spiel, wenn die rechte Spalte den Fokus hat) */
+.mainmenu_Menu[class~='_3I23qeyanGptsMyU2bKr8w'] {
+  padding: 10px 0;
+}
+
+/* Steams Schatten-Leiste unten ausblenden */
+.mainmenu_Menu > [class~='_3kHmfV9Pej6JhVOBMGhcgq'] {
+  display: none !important;
+}
+
+/* Zeilen-Container (ItemOuter) */
+.mainmenu_Menu > div:has(> [role="menuitem"]) {
+  width: 100% !important;
+  background: transparent !important;
+  border: none !important;
+  overflow: visible !important;
+}
+
+.mainmenu_Menu > div:has(> [role="menuitem"])::after {
+  display: none !important;
+}
+
+/* Menüeintrag */
+.mainmenu_Menu [role="menuitem"] {
+  width: calc(100% - 20px) !important;
+  margin: 2px 10px;
+  padding: 0 14px !important;
+  height: 46px !important;
+  min-height: 46px !important;
+  max-height: 46px !important;
+  box-sizing: border-box;
+  border-radius: var(--tvdeck-r-m);
+  background: transparent !important;
+  transform: none !important;
+  transform-origin: 50% 50% !important;
+  animation: none !important;
+  transition: transform var(--tvdeck-dur) var(--tvdeck-spring), background-color 0.15s ease,
+    box-shadow var(--tvdeck-dur) var(--tvdeck-ease) !important;
+}
+
+.mainmenu_Menu [role="menuitem"] > :not([style*="50%"]) {
+  color: var(--tvdeck-label-2) !important;
+}
+
+/* Blauen Aktiv-Balken ersetzen: aktive Seite = dezente Glasfüllung */
+.mainmenu_Menu [role="menuitem"] > div[style*="50%"] {
+  display: none !important;
+}
+
+.mainmenu_Menu [role="menuitem"]:is([class~='_10bq5BppQ3fcLqTNXms8yA'], :has(> div[style*="50%"])) {
+  background: rgba(255, 255, 255, 0.14) !important;
+}
+
+.mainmenu_Menu [role="menuitem"]:is([class~='_10bq5BppQ3fcLqTNXms8yA'], :has(> div[style*="50%"])) > * {
+  color: var(--tvdeck-label) !important;
+  font-weight: 600;
+}
+
+/* Fokus: weiße Pille, dunkle Schrift, leicht angehoben */
+.mainmenu_Menu [role="menuitem"].gpfocus,
+.mainmenu_Menu [role="menuitem"]:focus {
+  background: var(--tvdeck-focus-bg) !important;
+  transform: scale(var(--tvdeck-focus-scale)) !important;
+  box-shadow: var(--tvdeck-focus-shadow);
+}
+
+.mainmenu_Menu [role="menuitem"].gpfocus > *,
+.mainmenu_Menu [role="menuitem"]:focus > * {
+  color: var(--tvdeck-focus-fg) !important;
+  font-weight: 600;
+}
+
+/* Beschriftung */
+.mainmenu_Menu [role="menuitem"] > :last-child {
+  font-size: 17px !important;
+  font-weight: 500;
+  letter-spacing: -0.01em !important;
+  margin-left: 14px !important;
+}
+
+/* Gesperrt / nicht wählbar */
+.mainmenu_Menu [role="menuitem"]:is([class~='_1OasTJ1Z0s-85JV-gq7cdy'], [class~='Tnas_GzVSJeHzAz_LuNyZ']) > * {
+  color: var(--tvdeck-label-3) !important;
+}
+
+/* Eingeklappt: Einträge auf Icon-Breite */
+.mainmenu_Menu[class~='_3I23qeyanGptsMyU2bKr8w'] [role="menuitem"] {
+  width: 100% !important;
+  margin: 2px 0;
+  padding: 0 0 0 24px !important;
+  border-radius: 0;
+}
+
+/* Profilbild und laufende Spiele */
+.mainmenu_CurrentUserAvatar,
+.mainmenu_CurrentUserAvatar img {
+  border-radius: 50% !important;
+  overflow: hidden;
+}
+
+.mainmenu_Menu [role="menuitem"] img {
+  border-radius: 7px;
+}
+
+.mainmenu_RunnningAppSeparator {
+  height: 1px;
+  margin: 8px 24px;
+  background: var(--tvdeck-separator);
+  border: none;
+}
+
+/* ==========================================================================
+   Im Spiel: Spalte „Spiel fortsetzen, Controller, Erfolge …“ + Inhalt
+   ========================================================================== */
+._xfZ18oWU_ScrollMask {
+  background-color: transparent !important;
+}
+
+._xfZ18oWU_NavigationColumn {
+  /* Steams Rand per border-image ignoriert abgerundete Ecken */
+  border: none;
+  border-image: none;
+  background: var(--tvdeck-glass-sheen), var(--tvdeck-glass-solid);
+  border-radius: var(--tvdeck-r-xl);
+  margin: 0 0 0 10px;
+  padding: 8px 0;
+  box-shadow: var(--tvdeck-panel-shadow), var(--tvdeck-glass-edge);
+}
+
+._xfZ18oWU_NavigationColumn::before {
+  display: none;
+}
+
+._xfZ18oWU_NavigationMenuItem {
+  margin: 2px 10px;
+  border-radius: var(--tvdeck-r-m);
+  color: var(--tvdeck-label-2) !important;
+  font-weight: 500;
+  mix-blend-mode: normal !important;
+  animation: none !important;
+  transform: none !important;
+  transform-origin: 50% 50%;
+  transition: transform var(--tvdeck-dur) var(--tvdeck-spring), background-color 0.15s ease;
+}
+
+._xfZ18oWU_NavigationMenuItem._xfZ18oWU_Active {
+  background: rgba(255, 255, 255, 0.14) !important;
+  color: var(--tvdeck-label) !important;
+  font-weight: 600;
+}
+
+._xfZ18oWU_NavigationMenuItem.gpfocus,
+._xfZ18oWU_NavigationMenuItem:hover {
+  background: var(--tvdeck-focus-bg) !important;
+  color: var(--tvdeck-focus-fg) !important;
+  transform: scale(var(--tvdeck-focus-scale)) !important;
+  box-shadow: var(--tvdeck-focus-shadow);
+  font-weight: 600;
+}
+
+._xfZ18oWU_NavigationMenuItem ._xfZ18oWU_ActiveDot {
+  display: none;
+}
+
+._xfZ18oWU_NavigationMenuItem._xfZ18oWU_SwitchAppsTitle {
+  color: var(--tvdeck-label-2) !important;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 13px;
+  font-weight: 600;
+  background: transparent !important;
+  box-shadow: none;
+  transform: none !important;
+}
+
+._xfZ18oWU_NavigationMenuItemSeparator {
+  background: var(--tvdeck-separator);
+  margin: 8px 22px;
+}
+
+img._xfZ18oWU_CurrentGameLogo {
+  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.5));
+}
+
+._xfZ18oWU_AppColumn,
+._xfZ18oWU_AppColumn._xfZ18oWU_FocusedColumn {
+  background: var(--tvdeck-glass-sheen), var(--tvdeck-glass-solid) !important;
+  border-radius: var(--tvdeck-r-xl);
+  margin: 0 10px;
+  overflow: hidden;
+  box-shadow: var(--tvdeck-panel-shadow), var(--tvdeck-glass-edge);
+}

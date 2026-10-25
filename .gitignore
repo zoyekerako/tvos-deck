@@ -1,0 +1,10 @@
+# Vorschau: enthält heruntergeladenes Steam-CSS (Valve) – nicht weitergeben
+preview/.cache/
+preview/dist/
+# Release-ZIPs baut die GitHub Action bzw. tools/package_theme.py
+release/
+# CSS Loader speichert Einstellungen im Theme-Ordner
+tvOS-Deck/config_*.json
+__pycache__/
+.DS_Store
+.claude/

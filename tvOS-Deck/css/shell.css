@@ -1,0 +1,131 @@
+/* ==========================================================================
+   tvOS Deck – Rahmen der Oberfläche (nur Big Picture)
+   Kopfzeile, Seitenhintergründe, Bibliothek, Suche, Downloads.
+   ========================================================================== */
+
+/* ---- Kopfzeile: kein Balken, nur ein weicher Verlauf -------------------- */
+.header_Header::before,
+.header_Header.header_OverrideHeaderBackground.gpfocuswithin::before {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.62) 0%, rgba(0, 0, 0, 0.28) 60%, rgba(0, 0, 0, 0) 100%) !important;
+  backdrop-filter: none !important;
+}
+
+.header_Header.header_HeaderOpaque {
+  background-color: var(--tvdeck-wallpaper-base) !important;
+}
+
+.header_HeaderItem {
+  height: 32px;
+  margin: 0 2px;
+  padding: 0 10px !important;
+  border-radius: var(--tvdeck-r-pill);
+  transition: transform var(--tvdeck-dur) var(--tvdeck-spring), background-color 0.12s ease,
+    color 0.12s ease !important;
+}
+
+.header_HeaderItem.gpfocus,
+.header_HeaderItem.gpfocuswithin {
+  background: var(--tvdeck-focus-bg) !important;
+  color: var(--tvdeck-focus-fg) !important;
+  transform: scale(var(--tvdeck-focus-scale));
+  box-shadow: var(--tvdeck-focus-shadow);
+}
+
+.header_Clock {
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.header_Title {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.header_CurrentUserAvatar,
+.header_CurrentUserAvatar img {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.header_HeaderDownloadContainer .header_HeaderAppPortraitContainer .header_HeaderDownloadProgressBarBackground {
+  border-radius: var(--tvdeck-r-pill);
+  overflow: hidden;
+}
+
+.header_HeaderDownloadContainer .header_HeaderAppPortraitContainer .header_HeaderDownloadProgressBarBackground .header_HeaderDownloadProgressBar {
+  background-color: var(--tvdeck-tint);
+}
+
+/* Lautstärke-Einblendung als Glaspille */
+.header_VolumePopin {
+  background: var(--tvdeck-glass-thick);
+  backdrop-filter: var(--tvdeck-backdrop);
+  border-radius: var(--tvdeck-r-pill);
+  box-shadow: var(--tvdeck-panel-shadow), var(--tvdeck-glass-edge);
+}
+
+/* ---- Seitenhintergründe (deckend, damit Seitenwechsel sauber bleiben) --- */
+.gamepadlibrary_GamepadLibrary,
+.gamepadsearch_GamepadSearch,
+.downloads_DownloadsPage {
+  background: var(--tvdeck-wallpaper) !important;
+  background-color: var(--tvdeck-wallpaper-base) !important;
+}
+
+/* ---- Bibliothek --------------------------------------------------------- */
+.gamepadlibrary_CollectionHeader {
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+.gamepadlibrary_AppGridFilterHeaderAsButton {
+  background: var(--tvdeck-fill-2) !important;
+  border-radius: var(--tvdeck-r-pill);
+}
+
+.gamepadlibrary_AppGridFilterHeaderAsButton.gpfocus {
+  background: var(--tvdeck-focus-bg) !important;
+  color: var(--tvdeck-focus-fg) !important;
+}
+
+.gamepadlibrary_AppGridFilterText {
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  font-weight: 600 !important;
+}
+
+.BasicUI .allcollections_Collection {
+  border-radius: var(--tvdeck-r-m);
+  overflow: hidden;
+  background: var(--tvdeck-fill-3) !important;
+}
+
+.steamdeckcompatfilter_CompatFilterDialog {
+  border-radius: var(--tvdeck-r-l);
+  overflow: hidden;
+  background: var(--tvdeck-glass-thick);
+}
+
+.BasicUI .appfilterpane_Container .appfilterpane_FilterArea .appfilterpane_FilterBucket {
+  border-radius: var(--tvdeck-r-m);
+}
+
+/* ---- Suche & Downloads ---------------------------------------------------- */
+.gamepadsearch_ResultTemplateImage {
+  border-radius: var(--tvdeck-r-xs);
+  overflow: hidden;
+}
+
+.downloads_SectionItem {
+  border-radius: var(--tvdeck-r-m) !important;
+  overflow: hidden;
+}
+
+.downloadgraph_HeroAndLogo .downloadgraph_HeroContainer .downloadgraph_HeroGradient {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, var(--tvdeck-wallpaper-base) 100%);
+}
+
+/* ---- Lade-Animation ------------------------------------------------------- */
+.loadingthrobber_ContainerBackground {
+  background: transparent !important;
+}

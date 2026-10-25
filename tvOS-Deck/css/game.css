@@ -1,0 +1,199 @@
+/* ==========================================================================
+   tvOS Deck – Spieleseite (nur Big Picture)
+   Vorbild: Produktseite der Apple-TV-App – großes Bild, das weich in den
+   Hintergrund ausläuft, weißer „Spielen“-Button, runde Glas-Buttons.
+   ========================================================================== */
+
+.BasicUI .basicappdetailssectionstyler_AppDetailsRoot {
+  background: transparent;
+}
+
+/* ---- Titelbild & Logo -------------------------------------------------- */
+.BasicUI .sharedappdetailsheader_ImgContainer {
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 62%, rgba(0, 0, 0, 0.4) 86%, rgba(0, 0, 0, 0) 100%);
+}
+
+.sharedappdetailsheader_TitleLogo {
+  filter: drop-shadow(0 6px 22px rgba(0, 0, 0, 0.5));
+}
+
+.sharedappdetailsheader_SVGTitle {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.55);
+}
+
+/* ---- Spielleiste ------------------------------------------------------------ */
+.appdetailsplaysection_PlayBar,
+.BasicUI .basicappdetailssectionstyler_PlaySection {
+  background: transparent !important;
+}
+
+.appdetailsplaysection_StickyHeader {
+  background: var(--tvdeck-glass-thick);
+  backdrop-filter: var(--tvdeck-backdrop);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* Statistik: kleine graue Überschrift, darunter der Wert */
+.BasicUI .appdetailsplaysection_PlayBarLabel {
+  color: var(--tvdeck-label-2);
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.BasicUI .appdetailsplaysection_PlayBarDetailLabel,
+.BasicUI .appdetailsplaysection_LastPlayed .appdetailsplaysection_LastPlayedInfo {
+  color: var(--tvdeck-label);
+  font-weight: 600 !important;
+}
+
+/* ---- „Spielen“-Button --------------------------------------------------- */
+.BasicUI .basicappdetailssectionstyler_AppActionButton {
+  border-radius: var(--tvdeck-r-pill);
+  background: rgba(255, 255, 255, 0.24) !important;
+  overflow: hidden;
+  transition: transform var(--tvdeck-dur) var(--tvdeck-spring), box-shadow var(--tvdeck-dur) var(--tvdeck-ease),
+    background-color 0.15s ease;
+}
+
+.BasicUI .basicappdetailssectionstyler_AppActionButton:focus-within,
+.BasicUI .basicappdetailssectionstyler_AppActionButton:has(.gpfocus) {
+  background: var(--tvdeck-focus-bg) !important;
+  transform: scale(var(--tvdeck-focus-scale));
+  box-shadow: var(--tvdeck-focus-shadow);
+}
+
+.BasicUI .appactionbutton_ButtonChild,
+.BasicUI .appactionbutton_Green .appactionbutton_ButtonChild,
+.BasicUI .appactionbutton_Green .appactionbutton_ButtonChild:hover {
+  background: transparent !important;
+  color: var(--tvdeck-label) !important;
+}
+
+.BasicUI .appactionbutton_ButtonChild.Focusable:focus,
+.BasicUI .appactionbutton_ButtonChild.gpfocus,
+.BasicUI .appactionbutton_Green .appactionbutton_ButtonChild.Focusable:focus,
+.BasicUI .appactionbutton_Green .appactionbutton_ButtonChild.gpfocus,
+.BasicUI .basicappdetailssectionstyler_AppActionButton:focus-within .appactionbutton_ButtonChild,
+.BasicUI .basicappdetailssectionstyler_AppActionButton:has(.gpfocus) .appactionbutton_ButtonChild {
+  background: var(--tvdeck-focus-bg) !important;
+  color: var(--tvdeck-focus-fg) !important;
+}
+
+.BasicUI .appactionbutton_ButtonChild .appactionbutton_ButtonText {
+  color: inherit !important;
+  font-weight: 600 !important;
+  font-size: 18px !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* Steams blauer/grüner Licht-Streifen beim Fokus */
+.BasicUI .appactionbutton_ButtonChild::after,
+.BasicUI .appactionbutton_Green .appactionbutton_ButtonChild::after {
+  display: none !important;
+}
+
+.BasicUI .appactionbutton_Disabled .appactionbutton_PlayButton,
+.BasicUI .appactionbutton_Disabled .appactionbutton_StreamingSelector {
+  background: transparent !important;
+  color: var(--tvdeck-label-3) !important;
+}
+
+/* Stopp-Button (läuft gerade) */
+.appactionbutton_ShutdownAppButton {
+  border-radius: 50%;
+  background-color: var(--tvdeck-fill) !important;
+  transition: transform var(--tvdeck-dur) var(--tvdeck-spring), background-color 0.15s ease;
+}
+
+.appactionbutton_ShutdownAppButton.gpfocus {
+  background-color: var(--tvdeck-focus-bg) !important;
+  color: var(--tvdeck-focus-fg) !important;
+  transform: scale(1.1);
+  box-shadow: var(--tvdeck-focus-shadow);
+}
+
+.appactionbutton_ShutdownAppButton.gpfocus svg {
+  fill: var(--tvdeck-focus-fg) !important;
+}
+
+.appactionbutton_ShutdownAppButton.gpfocus.appactionbutton_ForceShutdownButton {
+  background-color: var(--tvdeck-red) !important;
+  color: #fff !important;
+}
+
+/* ---- Runde Glas-Buttons (Einstellungen, Favorit, Controller, Info) ------ */
+.BasicUI .appdetailsplaysection_MenuButton {
+  border-radius: 50%;
+  background-color: var(--tvdeck-fill) !important;
+  transition: transform var(--tvdeck-dur) var(--tvdeck-spring), background-color 0.15s ease;
+}
+
+.BasicUI .appdetailsplaysection_MenuButton.Focusable:focus,
+.BasicUI .appdetailsplaysection_MenuButton.gpfocus {
+  background-color: var(--tvdeck-focus-bg) !important;
+  color: var(--tvdeck-focus-fg) !important;
+  transform: scale(1.1);
+  box-shadow: var(--tvdeck-focus-shadow);
+}
+
+.BasicUI .appdetailsplaysection_MenuButton.Focusable:focus svg,
+.BasicUI .appdetailsplaysection_MenuButton.gpfocus svg {
+  color: var(--tvdeck-focus-fg) !important;
+  fill: var(--tvdeck-focus-fg) !important;
+}
+
+.BasicUI .appdetailsplaysection_MenuButton.appdetailsplaysection_FavoriteButton.appdetailsplaysection_Favorited svg path,
+.BasicUI .appdetailsplaysection_MenuButton.Focusable:focus.appdetailsplaysection_Favorited svg path {
+  fill: var(--tvdeck-red) !important;
+}
+
+/* ---- Inhaltsbereiche unter der Tab-Leiste ------------------------------- */
+.BasicUI .appdetailssection_AppDetailsSectionContainer.appdetailssection_RightColumnSection {
+  background: var(--tvdeck-fill-3);
+  border-radius: var(--tvdeck-r-l);
+  overflow: hidden;
+}
+
+.BasicUI .appdetailssection_Highlight {
+  background: var(--tvdeck-fill-2);
+  border-radius: var(--tvdeck-r-m);
+}
+
+.BasicUI .appactivityday_Event,
+.apppartnereventspage_PartnerEvent,
+.BasicUI .spotlightgameplaysummary_SummaryCarouselContainer,
+.appdetailsachievementssection_AchievementCarouselItem,
+.appdetailsdlcsection_Item,
+.appdetailsdlcsection_Remainder,
+.BasicUI .appdetailscommunityfeed_CommunityItem,
+.appdetailsgameinfopanel_DeckVerifiedInfo,
+.recentlycompleted_RecentlyCompletedItem {
+  border-radius: var(--tvdeck-r-m) !important;
+  overflow: hidden;
+}
+
+.spotlightgameplaysummary_SummaryScreenshot,
+.spotlightgameplaysummary_SummaryScreenshot > img:first-child,
+.appdetailsscreenshotssection_Thumbnail,
+.appdetailsscreenshotssection_Thumbnail > img:first-child,
+.appactivityday_PartnerEventMediumImage_Image {
+  border-radius: var(--tvdeck-r-s) !important;
+}
+
+.appdetailsdlcsection_Gloss {
+  background: none;
+}
+
+.BasicUI .appdetailsprimarylinkssection_Anchor {
+  border-radius: var(--tvdeck-r-pill);
+}
+
+.BasicUI .basicappdetailssectionstyler_DeckVerifiedFeedbackContainer,
+.BasicUI .basicappdetailssectionstyler_DeckVerifiedFeedbackConfirmationContainer {
+  background: var(--tvdeck-fill-3);
+  border-radius: var(--tvdeck-r-l);
+}

@@ -1,0 +1,194 @@
+/* ==========================================================================
+   tvOS Deck – Quick Access Menu (…-Taste) – nur im Fenster „QuickAccess“
+   Vorbild: das tvOS-Kontrollzentrum als schwebendes Glas-Panel.
+
+   Das QAM ist ein eigenes, schmales Fenster (348 px, „Freunde“ 854 px),
+   der Inhalt ist intern aber 854 px breit. Damit Decky- und CSS-Loader-
+   Panels ihr Layout behalten, wird das Panel nur per clip-path auf die
+   sichtbare Breite zugeschnitten (100vw = Fensterbreite) – ohne die
+   Inhalte zu verschieben. Kein echter Blur möglich (eigenes Fenster).
+   ========================================================================== */
+
+.quickaccessmenu_QuickAccessMenu {
+  --tvdeck-row-scale: 1;
+  --tvdeck-qam-inset: 8px;
+  position: relative;
+  background: var(--tvdeck-glass-sheen), var(--tvdeck-glass-solid);
+  clip-path: inset(var(--tvdeck-qam-inset) calc(100% - min(100vw, 100%) + var(--tvdeck-qam-inset))
+    var(--tvdeck-qam-inset) var(--tvdeck-qam-inset) round var(--tvdeck-r-xl));
+}
+
+/* Lichtkante entlang des sichtbaren Panels */
+.quickaccessmenu_QuickAccessMenu::after {
+  content: "";
+  position: absolute;
+  top: var(--tvdeck-qam-inset);
+  bottom: var(--tvdeck-qam-inset);
+  left: var(--tvdeck-qam-inset);
+  width: calc(min(100vw, 100%) - 2 * var(--tvdeck-qam-inset));
+  border-radius: var(--tvdeck-r-xl);
+  box-shadow: var(--tvdeck-glass-edge);
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* Kopfzeile im Spiel (Uhr/Akku oben im QAM) und Trennlinien */
+.header_Header.header_InQuickAccess {
+  background: transparent !important;
+}
+
+.quickaccessmenu_HeaderAndFooterVisible .quickaccessmenu_Menu::before,
+.quickaccessmenu_HeaderAndFooterVisible .quickaccessmenu_Menu::after {
+  background: var(--tvdeck-separator);
+}
+
+.footer_BasicFooter.footer_QuickAccessFooter {
+  background: transparent !important;
+}
+
+/* ---- Icon-Leiste (links) ------------------------------------------------ */
+.quickaccessmenu_Tabs::after {
+  background: transparent;
+}
+
+/* Breite bleibt 48 px (border-box); die Fläche wird per Innenabstand zur
+   abgerundeten Kachel – mit Abstand zum 8-px-Zuschnitt des Panels. */
+.quickaccessmenu_Tab {
+  box-sizing: border-box;
+  padding: 7px 4px 7px 12px;
+  background-clip: content-box !important;
+  border-radius: 20px;
+  color: var(--tvdeck-label-2) !important;
+  background-color: transparent !important;
+  animation: none !important;
+  transition: transform var(--tvdeck-dur) var(--tvdeck-spring), background-color 0.12s ease,
+    color 0.12s ease !important;
+}
+
+.quickaccessmenu_Tab.quickaccessmenu_Selected {
+  background-color: rgba(255, 255, 255, 0.16) !important;
+  color: var(--tvdeck-label) !important;
+}
+
+.quickaccessmenu_Tab.gpfocus,
+.gpfocus .quickaccessmenu_Tab,
+.quickaccessmenu_Tab.quickaccessmenu_Selected.gpfocus {
+  background-color: var(--tvdeck-focus-bg) !important;
+  color: var(--tvdeck-focus-fg) !important;
+  transform: scale(var(--tvdeck-focus-scale));
+}
+
+.quickaccessmenu_Tab.quickaccessmenu_VoiceTab {
+  background-color: var(--tvdeck-green) !important;
+  color: #fff !important;
+}
+
+.quickaccessmenu_KeyboardButton {
+  border: none !important;
+  border-radius: var(--tvdeck-r-s);
+  background: var(--tvdeck-fill-2);
+  margin-left: 4px;
+}
+
+.quickaccessmenu_KeyboardButton.gpfocus {
+  background: var(--tvdeck-focus-bg);
+  color: var(--tvdeck-focus-fg);
+  animation: none !important;
+}
+
+.quickaccessmenu_KeyboardButton.gpfocus svg path {
+  fill: var(--tvdeck-focus-fg);
+}
+
+/* ---- Inhalt ---------------------------------------------------------------- */
+.quickaccessmenu_PanelOuterNav {
+  padding-top: 20px;
+}
+
+/* Seitentitel wie in tvOS: groß, fett, normale Schreibweise */
+.quickaccessmenu_Title,
+.remoteplay_QuickAccessTitle {
+  background: transparent;
+  box-shadow: none;
+  text-transform: none;
+  letter-spacing: -0.015em;
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--tvdeck-label);
+  padding-left: 18px;
+}
+
+.quickaccessmenu_PanelSectionTitle,
+.quickaccesscontrols_PanelSectionTitle {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--tvdeck-label-2);
+}
+
+.quickaccessmenu_Label {
+  font-size: 13px;
+  color: var(--tvdeck-label-2);
+}
+
+/* Akku-Bereich */
+.quickaccesscontrols_BatteryPercentageLabel {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.quickaccesscontrols_BatteryDetailsLabels {
+  color: var(--tvdeck-label-2);
+}
+
+.quickaccessmenu_LowBattery {
+  border-radius: var(--tvdeck-r-s);
+  margin: 0 12px;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 12px;
+}
+
+/* Benachrichtigungen als Karten */
+.quickaccessmenu_QuickAccessNotifications > div + div::before {
+  border-bottom-color: var(--tvdeck-separator) !important;
+}
+
+.standardtemplates_StandardTemplateContainer,
+.shorttemplates_StandardTemplateContainer {
+  border-radius: var(--tvdeck-r-m);
+  overflow: hidden;
+}
+
+.standardtemplates_StandardTemplateContainer.gpfocus,
+.standardtemplates_StandardTemplateContainer.gpfocuswithin,
+.shorttemplates_StandardTemplateContainer.gpfocus,
+.shorttemplates_StandardTemplateContainer.gpfocuswithin {
+  background: rgba(255, 255, 255, 0.14) !important;
+}
+
+.quickaccesscontrols_EmptyNotifications {
+  color: var(--tvdeck-label-2);
+}
+
+/* Freunde-Liste im QAM */
+.GamepadMode.friendlist,
+.GamepadMode.friendlist.gpfocuswithin,
+.GamepadMode.friendlist .FriendsListSteamDeckTopSection,
+.GamepadMode.friendlist .FriendsListSteamDeckTabs {
+  background: transparent !important;
+}
+
+/* Musik-Steuerung */
+.soundtrackcontrols_IconButton {
+  border-radius: 50%;
+}
+
+.soundtrackcontrols_IconButton.gpfocus {
+  background: var(--tvdeck-focus-bg) !important;
+}
+
+.soundtrackcontrols_IconButton.gpfocus svg path {
+  fill: var(--tvdeck-focus-fg) !important;
+}

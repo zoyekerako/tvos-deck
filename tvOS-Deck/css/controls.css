@@ -1,0 +1,586 @@
+/* ==========================================================================
+   tvOS Deck – Bedienelemente (alle Fenster)
+   Fokus-Prinzip von tvOS: Das fokussierte Element wird weiß, der Text
+   dunkel, es hebt sich leicht an (Skalierung + weicher Schatten).
+   Kein blauer Rahmen, kein Blinken.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Steams Fokus-Rahmen (für Elemente ohne eigenen Fokus-Stil)
+   -------------------------------------------------------------------------- */
+.focusring_FocusRing {
+  outline: 3px solid rgba(255, 255, 255, 0.95) !important;
+  outline-offset: 3px !important;
+  border-radius: var(--tvdeck-r-m);
+  animation: none;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* --------------------------------------------------------------------------
+   Buttons
+   -------------------------------------------------------------------------- */
+button.gamepaddialog_Button.DialogButton,
+button.gamepaddialog_Button.DialogButton:enabled,
+button.gamepaddialog_Button.DialogButton:enabled:active:hover {
+  background: var(--tvdeck-fill) !important;
+  color: var(--tvdeck-label) !important;
+  border: none !important;
+  border-radius: var(--tvdeck-r-pill) !important;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  box-shadow: none !important;
+  transform: scale(1);
+  transition: transform var(--tvdeck-dur) var(--tvdeck-spring), background-color 0.15s ease,
+    color 0.15s ease, box-shadow var(--tvdeck-dur) var(--tvdeck-ease) !important;
+}
+
+button.gamepaddialog_Button.DialogButton.Primary,
+button.gamepaddialog_Button.DialogButton:enabled.Primary {
+  background: rgba(255, 255, 255, 0.24) !important;
+}
+
+button.gamepaddialog_Button.DialogButton.gpfocus,
+button.gamepaddialog_Button.DialogButton:enabled.gpfocus,
+button.gamepaddialog_Button.DialogButton:enabled:active:hover.gpfocus,
+button.gamepaddialog_Button.DialogButton.gpfocus.Primary,
+button.gamepaddialog_Button.DialogButton:enabled.gpfocus.Primary {
+  background: var(--tvdeck-focus-bg) !important;
+  color: var(--tvdeck-focus-fg) !important;
+  transform: scale(var(--tvdeck-focus-scale));
+  box-shadow: var(--tvdeck-focus-shadow) !important;
+}
+
+button.gamepaddialog_Button.DialogButton:active:not(.Disabled) {
+  transform: scale(calc(var(--tvdeck-focus-scale) - 0.04));
+}
+
+button.gamepaddialog_Button.DialogButton.gpfocus.gamepadcontextmenu_Destructive,
+button.gamepaddialog_Button.DialogButton:enabled.gpfocus.gamepadcontextmenu_Destructive {
+  background: var(--tvdeck-red) !important;
+  color: #fff !important;
+}
+
+button.gamepaddialog_Button.DialogButton.Disabled,
+button.gamepaddialog_Button.DialogButton[disabled],
+button.gamepaddialog_Button.DialogButton.Disabled.gpfocus,
+button.gamepaddialog_Button.DialogButton[disabled].gpfocus {
+  background: var(--tvdeck-fill-3) !important;
+  color: var(--tvdeck-label-3) !important;
+  transform: none;
+  box-shadow: none !important;
+}
+
+button.gamepaddialog_Button.DialogButton svg {
+  color: currentColor;
+  fill: currentColor;
+}
+
+/* Dropdown-Buttons (z. B. Einstellungen → Sprache) */
+button.gamepaddropdown_DropDownControlButton.DialogButton {
+  border-radius: var(--tvdeck-r-s) !important;
+  padding: 10px 16px;
+}
+
+.dropdownlabel_DropDownLabelTitle,
+.dropdownlabel_DropDownLabelDescription,
+.dropdownlabel_DropDownLabelUpperDescription {
+  color: inherit !important;
+}
+
+.dropdownlabel_DropDownLabelDescription,
+.dropdownlabel_DropDownLabelUpperDescription {
+  opacity: 0.65;
+}
+
+/* --------------------------------------------------------------------------
+   Listenzeilen (Einstellungen, QAM, Dialoge)
+   -------------------------------------------------------------------------- */
+.gamepaddialog_Field {
+  border-radius: var(--tvdeck-r-s);
+  transition: transform var(--tvdeck-dur) var(--tvdeck-spring), background-color 0.12s ease,
+    box-shadow var(--tvdeck-dur) var(--tvdeck-ease);
+}
+
+.gamepaddialog_FieldLabel {
+  color: var(--tvdeck-label);
+  font-weight: 500;
+}
+
+.gamepaddialog_FieldDescription {
+  color: var(--tvdeck-label-2);
+}
+
+/* Trennlinien dezenter */
+.gamepaddialog_Field.gamepaddialog_WithBottomSeparatorStandard::after,
+.gamepaddialog_Field.gamepaddialog_WithBottomSeparatorThick::after {
+  background: var(--tvdeck-separator) !important;
+  height: 1px !important;
+}
+
+/* a) Zeile selbst fokussiert (Links, Menüpunkte) oder Schalter-Zeile:
+      weiß wie in den tvOS-Einstellungen */
+.gamepaddialog_Field.gamepaddialog_HighlightOnFocus.gpfocus,
+.gamepaddialog_Field.gamepaddialog_HighlightOnFocus.gpfocuswithin:has(.gamepaddialog_Toggle.gpfocus) {
+  background: var(--tvdeck-focus-bg) !important;
+  color: var(--tvdeck-focus-fg) !important;
+  transform: scale(var(--tvdeck-row-scale));
+  box-shadow: var(--tvdeck-focus-shadow);
+  animation: none !important;
+  z-index: 2;
+}
+
+.gamepaddialog_Field.gamepaddialog_HighlightOnFocus.gpfocus::after,
+.gamepaddialog_Field.gamepaddialog_HighlightOnFocus.gpfocuswithin::after {
+  opacity: 0;
+}
+
+:is(.gamepaddialog_Field.gamepaddialog_HighlightOnFocus.gpfocus,
+  .gamepaddialog_Field.gamepaddialog_HighlightOnFocus.gpfocuswithin:has(.gamepaddialog_Toggle.gpfocus))
+  :is(.gamepaddialog_FieldLabel, .gamepaddialog_FieldDescription, .gamepaddialog_FieldLabelValue, .gamepaddialog_FieldChildrenInner) {
+  color: var(--tvdeck-focus-fg) !important;
+}
+
+:is(.gamepaddialog_Field.gamepaddialog_HighlightOnFocus.gpfocus,
+  .gamepaddialog_Field.gamepaddialog_HighlightOnFocus.gpfocuswithin:has(.gamepaddialog_Toggle.gpfocus))
+  .gamepaddialog_FieldDescription {
+  color: var(--tvdeck-focus-fg-2) !important;
+}
+
+:is(.gamepaddialog_Field.gamepaddialog_HighlightOnFocus.gpfocus,
+  .gamepaddialog_Field.gamepaddialog_HighlightOnFocus.gpfocuswithin:has(.gamepaddialog_Toggle.gpfocus)) svg {
+  color: currentColor;
+}
+
+/* b) Ein Kind-Element (Button, Slider, Dropdown) hat den Fokus:
+      nur dezente Glas-Hervorhebung, das Kind selbst wird weiß */
+.gamepaddialog_Field.gamepaddialog_HighlightOnFocus.gpfocuswithin:not(.gpfocus):not(:has(.gamepaddialog_Toggle.gpfocus)) {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: var(--tvdeck-label) !important;
+  animation: none !important;
+}
+
+.gamepaddialog_Field.gamepaddialog_Disabled .gamepaddialog_FieldLabel {
+  color: var(--tvdeck-label-3);
+}
+
+/* --------------------------------------------------------------------------
+   Schalter – iOS/tvOS-Stil
+   -------------------------------------------------------------------------- */
+.gamepaddialog_Toggle {
+  border-radius: var(--tvdeck-r-pill);
+  transition: transform var(--tvdeck-dur) var(--tvdeck-spring), box-shadow 0.2s ease !important;
+}
+
+.gamepaddialog_Toggle.gpfocus::after {
+  display: none !important;
+}
+
+.gamepaddialog_Toggle:not(.gamepaddialog_Disabled):hover {
+  box-shadow: none;
+}
+
+.gamepaddialog_ToggleRail,
+.gamepaddialog_Field.gpfocuswithin .gamepaddialog_ToggleRail {
+  background: rgba(120, 120, 128, 0.36) !important;
+  border: none;
+}
+
+.gamepaddialog_ToggleRail::before {
+  background: var(--tvdeck-switch);
+  transform: none !important;
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+
+.gamepaddialog_Toggle.gamepaddialog_On .gamepaddialog_ToggleRail::before {
+  opacity: 1;
+}
+
+.gamepaddialog_ToggleSwitch {
+  top: 2px;
+  bottom: auto;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  margin: 0 !important;
+  border: none !important;
+  background: #fff !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.28), 0 0 0 0.5px rgba(0, 0, 0, 0.06);
+  transition: transform 0.28s var(--tvdeck-spring);
+}
+
+.gamepaddialog_Toggle.gamepaddialog_On .gamepaddialog_ToggleSwitch {
+  transform: translateX(16px);
+}
+
+/* Fokus-Hinweis, wenn der Schalter nicht in einer weißen Zeile sitzt */
+.gamepaddialog_Toggle.gpfocus {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35);
+}
+
+.gamepaddialog_Field.gpfocus .gamepaddialog_Toggle,
+.gamepaddialog_Field.gpfocuswithin .gamepaddialog_Toggle.gpfocus {
+  box-shadow: none;
+}
+
+.gamepaddialog_Toggle.gamepaddialog_Disabled {
+  opacity: 0.4;
+}
+
+/* --------------------------------------------------------------------------
+   Slider
+   -------------------------------------------------------------------------- */
+.gamepadslider_SliderTrack {
+  --left-track-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.18);
+  border-radius: var(--tvdeck-r-pill);
+}
+
+.gamepadslider_SliderHandle {
+  background: #fff !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 0 0.5px rgba(0, 0, 0, 0.08) !important;
+  transition: transform var(--tvdeck-dur) var(--tvdeck-spring);
+}
+
+.gamepadslider_SliderControlAndNotches:not(.gamepadslider_Disabled).gpfocus .gamepadslider_SliderHandle,
+.gamepaddialog_Field.gpfocuswithin .gamepadslider_SliderControlAndNotches.gpfocus .gamepadslider_SliderHandle {
+  border: none !important;
+  margin: 0;
+  animation: none;
+  transform: scale(1.18);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45), 0 0 0 4px rgba(255, 255, 255, 0.22) !important;
+}
+
+.gamepadslider_SliderNotchTick {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.22) !important;
+}
+
+.gamepadslider_SliderNotchTick.gamepadslider_TickActive {
+  background-color: #fff !important;
+}
+
+.gamepadslider_EditableValue {
+  border-radius: var(--tvdeck-r-xs);
+}
+
+.gamepadslider_EditableValue.gpfocus {
+  background: var(--tvdeck-focus-bg) !important;
+  color: var(--tvdeck-focus-fg) !important;
+}
+
+.gamepadslider_DescriptionValue {
+  color: var(--tvdeck-label-2);
+  font-weight: 500;
+}
+
+.gamepadslider_SliderControlAndNotches.gamepadslider_Disabled .gamepadslider_SliderTrack::before {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   Texteingabe, Checkboxen, Fortschrittsbalken
+   -------------------------------------------------------------------------- */
+.gamepaddialog_BasicTextInput,
+.BasicUI .gamepaddialog_BasicTextInput {
+  background: var(--tvdeck-fill-2) !important;
+  color: var(--tvdeck-label) !important;
+  border: none;
+  border-radius: var(--tvdeck-r-s);
+  caret-color: var(--tvdeck-tint);
+}
+
+.gamepaddialog_BasicTextInput.gpfocus,
+.gamepaddialog_BasicTextInput.gpfocus:hover {
+  background: var(--tvdeck-focus-bg) !important;
+  color: var(--tvdeck-focus-fg) !important;
+  box-shadow: var(--tvdeck-focus-shadow);
+}
+
+.gamepaddialog_BasicTextInput::placeholder {
+  color: var(--tvdeck-label-3);
+}
+
+.DialogCheckbox {
+  border-radius: 7px !important;
+  background: var(--tvdeck-fill) !important;
+  box-shadow: none !important;
+}
+
+.DialogCheckbox_Container:focus .DialogCheckbox,
+.DialogCheckbox_Container.gpfocus .DialogCheckbox {
+  background: var(--tvdeck-focus-bg) !important;
+}
+
+.DialogCheckbox_Container:focus .DialogCheckbox path,
+.DialogCheckbox_Container.gpfocus .DialogCheckbox path {
+  stroke: var(--tvdeck-focus-fg) !important;
+}
+
+.progressbar_ProgressBar {
+  background: rgba(255, 255, 255, 0.16) !important;
+  border-radius: var(--tvdeck-r-pill);
+}
+
+.progressbar_ProgressBar .progressbar_Percent {
+  background: var(--tvdeck-tint);
+  border-radius: var(--tvdeck-r-pill);
+}
+
+.progressbar_ProgressBarFieldStatus .progressbar_TextContainer .progressbar_OperationText {
+  color: var(--tvdeck-tint);
+}
+
+/* --------------------------------------------------------------------------
+   Kontextmenüs (Optionen-Taste ☰) – tvOS-Kontextmenü aus Glas
+   -------------------------------------------------------------------------- */
+.gamepadcontextmenu_contextMenuFade {
+  background: #000;
+  opacity: 0.35;
+}
+
+.gamepadcontextmenu_contextMenuContents {
+  background: var(--tvdeck-glass-thick);
+  backdrop-filter: var(--tvdeck-backdrop);
+  border-radius: var(--tvdeck-r-xl);
+  padding: 10px;
+  box-shadow: var(--tvdeck-panel-shadow), var(--tvdeck-glass-edge);
+  filter: none;
+  animation: tvdeck-pop 0.26s var(--tvdeck-ease) both;
+}
+
+.gamepadcontextmenu_contextMenuContents > :first-child {
+  margin-top: 0 !important;
+}
+
+.gamepadcontextmenu_contextMenuContents > :last-child {
+  margin-bottom: 0 !important;
+}
+
+.gamepadcontextmenu_contextMenu {
+  background: var(--tvdeck-glass-thick);
+  backdrop-filter: var(--tvdeck-backdrop);
+  border-radius: var(--tvdeck-r-l);
+  box-shadow: var(--tvdeck-panel-shadow), var(--tvdeck-glass-edge);
+  padding: 8px;
+}
+
+.gamepadcontextmenu_contextMenuItem,
+.gamepadcontextmenu_contextMenuItem:is(.Stream, .Connect, .PlayMusic, .Resume, .BorrowApp,
+  .Download, .Update, .PreLoad, .Install, .Stop) {
+  background: transparent !important;
+  color: var(--tvdeck-label) !important;
+  border-radius: var(--tvdeck-r-s);
+  padding: 12px 18px !important;
+  font-weight: 500;
+  transition: transform var(--tvdeck-dur) var(--tvdeck-spring), background-color 0.12s ease !important;
+}
+
+.gamepadcontextmenu_contextMenuItem:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.gamepadcontextmenu_contextMenuItem.gamepadcontextmenu_Selected {
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+
+.gamepadcontextmenu_contextMenuItem.gamepadcontextmenu_Focused,
+.gamepadcontextmenu_contextMenuItem.gamepadcontextmenu_active,
+.gamepadcontextmenu_contextMenuItem.gamepadcontextmenu_Focused:is(.gamepadcontextmenu_Positive,
+  .gamepadcontextmenu_Emphasis, .Stream, .Connect, .PlayMusic, .Resume, .Download, .Update,
+  .PreLoad, .Install) {
+  background: var(--tvdeck-focus-bg) !important;
+  color: var(--tvdeck-focus-fg) !important;
+  transform: scale(1.03);
+  box-shadow: var(--tvdeck-focus-shadow);
+  z-index: 1;
+}
+
+.gamepadcontextmenu_contextMenuItem.gamepadcontextmenu_Focused:is(.gamepadcontextmenu_Destructive, .Stop) {
+  background: var(--tvdeck-red) !important;
+  color: #fff !important;
+}
+
+.gamepadcontextmenu_contextMenuItem.disabled {
+  color: var(--tvdeck-label-3) !important;
+}
+
+.gamepadcontextmenu_contextMenuItem.menuChecked {
+  color: var(--tvdeck-tint) !important;
+}
+
+.gamepadcontextmenu_contextMenuItem.gamepadcontextmenu_MenuSectionHeader {
+  text-transform: none !important;
+  color: var(--tvdeck-label-2) !important;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.gamepadcontextmenu_contextMenuItem.gamepadcontextmenu_Capitalized,
+.gamepadcontextmenu_contextMenuItem.gamepadcontextmenu_UpperCase {
+  text-transform: none !important;
+}
+
+.gamepadcontextmenu_ContextMenuSeparator {
+  height: 1px;
+  min-height: 1px;
+  margin: 6px 14px;
+  background: var(--tvdeck-separator) !important;
+}
+
+.gamepadcontextmenu_BasicContextMenuHeader {
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
+/* --------------------------------------------------------------------------
+   Dialoge / Modale Fenster – tvOS-Alert
+   -------------------------------------------------------------------------- */
+.gamepadui_GamepadDialogOverlay .ModalOverlayBackground {
+  background: rgba(0, 0, 0, 0.52) !important;
+  backdrop-filter: blur(26px) saturate(140%) !important;
+}
+
+.gamepaddialog_ModalPosition > .gamepaddialog_GamepadDialogContent {
+  background: var(--tvdeck-glass-thick) !important;
+  backdrop-filter: var(--tvdeck-backdrop);
+  border: none !important;
+  border-radius: var(--tvdeck-r-xl);
+  box-shadow: var(--tvdeck-panel-shadow), var(--tvdeck-glass-edge) !important;
+}
+
+.gamepaddialog_GamepadDialogContent .DialogHeader {
+  text-transform: none !important;
+  letter-spacing: -0.015em !important;
+  font-size: 24px !important;
+  line-height: 30px !important;
+  font-weight: 700 !important;
+  color: var(--tvdeck-label) !important;
+}
+
+.gamepaddialog_GamepadDialogContent .DialogSubHeader {
+  font-weight: 600;
+  color: var(--tvdeck-label);
+}
+
+.gamepaddialog_GamepadDialogContent .DialogControlsSectionHeader {
+  color: var(--tvdeck-label-2) !important;
+  border-bottom: none !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  padding: 18px 0 8px;
+}
+
+.gamepaddialog_GamepadDialogContent .DialogBodyText {
+  color: var(--tvdeck-label-2) !important;
+  line-height: 1.45;
+}
+
+.gamepaddialog_GamepadDialogContent ._DialogInputContainer {
+  border-radius: var(--tvdeck-r-s);
+}
+
+.gamepaddialog_GamepadDialogContent ._DialogInputContainer.gpfocus,
+.gamepaddialog_GamepadDialogContent ._DialogInputContainer.Active {
+  background-color: var(--tvdeck-focus-bg) !important;
+  color: var(--tvdeck-focus-fg) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Tab-Leiste (Bibliothek, Startseite, Spieleseite) – tvOS-Tabbar
+   -------------------------------------------------------------------------- */
+.gamepadtabbedpage_TabsRowScroll {
+  -webkit-mask-image: none;
+}
+
+.gamepadtabbedpage_FixCenterAlignScroll {
+  background: var(--tvdeck-glass);
+  backdrop-filter: var(--tvdeck-backdrop);
+  box-shadow: var(--tvdeck-glass-edge);
+  border-radius: var(--tvdeck-r-pill);
+  padding: 4px;
+  margin: 8px 0;
+  column-gap: 2px;
+}
+
+.gamepadtabbedpage_Tab {
+  text-transform: none;
+  letter-spacing: -0.005em;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 7px 18px !important;
+  border-radius: var(--tvdeck-r-pill);
+  color: var(--tvdeck-label-2) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transition: transform var(--tvdeck-dur) var(--tvdeck-spring), background-color 0.15s ease,
+    color 0.15s ease !important;
+}
+
+.gamepadtabbedpage_Tab.gamepadtabbedpage_Selected {
+  background: rgba(255, 255, 255, 0.17) !important;
+  color: var(--tvdeck-label) !important;
+}
+
+.gamepadtabbedpage_Tab.gpfocus {
+  background: var(--tvdeck-focus-bg) !important;
+  color: var(--tvdeck-focus-fg) !important;
+  transform: scale(var(--tvdeck-focus-scale));
+  box-shadow: var(--tvdeck-focus-shadow) !important;
+}
+
+.gamepadtabbedpage_Tab.gpfocus .gamepadtabbedpage_TabCount {
+  color: var(--tvdeck-focus-fg-2) !important;
+}
+
+.gamepadtabbedpage_TabCount {
+  color: var(--tvdeck-label-3) !important;
+}
+
+.gamepadtabbedpage_TabCountBadge {
+  background-color: var(--tvdeck-tint);
+}
+
+/* Kopfzeile beim Scrollen: weicher Verlauf statt harter Balken */
+.gamepadtabbedpage_GamepadTabbedPage.gamepadtabbedpage_IsUnderHeader .gamepadtabbedpage_TabHeaderRowWrapper::before,
+.gamepadtabbedpage_TabHeaderRowWrapper.gamepadtabbedpage_ScrolledDown::before {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.35) 65%, rgba(0, 0, 0, 0) 100%) !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+.gamepadtabbedpage_SortAndFilterContainer {
+  background: var(--tvdeck-glass-thick);
+  backdrop-filter: var(--tvdeck-backdrop) !important;
+  border: none;
+  border-radius: var(--tvdeck-r-l);
+  box-shadow: var(--tvdeck-panel-shadow), var(--tvdeck-glass-edge);
+}
+
+.gamepadtabbedpage_SortAndFilterButton {
+  border-radius: var(--tvdeck-r-pill);
+}
+
+/* --------------------------------------------------------------------------
+   4K / hochauflösende Displays (Steam Machine am TV, 200 % Skalierung):
+   Trennlinien als echte Haarlinien (1 Gerätepixel) wie bei tvOS
+   -------------------------------------------------------------------------- */
+@media (min-resolution: 2dppx) {
+  .gamepaddialog_Field.gamepaddialog_WithBottomSeparatorStandard::after,
+  .gamepaddialog_Field.gamepaddialog_WithBottomSeparatorThick::after {
+    height: 0.5px !important;
+  }
+
+  .gamepadcontextmenu_ContextMenuSeparator {
+    height: 0.5px !important;
+    min-height: 0.5px !important;
+  }
+}

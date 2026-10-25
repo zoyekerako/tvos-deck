@@ -1,0 +1,125 @@
+/* ==========================================================================
+   tvOS Deck – Design-Tokens
+   Wird in alle Steam-Fenster injiziert (Big Picture, Hauptmenü, QAM, Toasts).
+   Die Optionen im CSS Loader überschreiben einzelne Variablen.
+   ========================================================================== */
+
+:root {
+  /* ---- Typografie ---------------------------------------------------- */
+  --tvdeck-font: "SF Pro Display", "SF Pro Text", "SF Pro", "tvOS Inter", "Inter",
+    "Motiva Sans", system-ui, sans-serif;
+
+  /* ---- Farben (tvOS Dark Appearance) ------------------------------------ */
+  --tvdeck-label: #ffffff;
+  --tvdeck-label-2: rgba(235, 235, 245, 0.62);
+  --tvdeck-label-3: rgba(235, 235, 245, 0.34);
+  --tvdeck-separator: rgba(255, 255, 255, 0.09);
+
+  --tvdeck-fill: rgba(120, 120, 128, 0.3);       /* Buttons, Tasten (unfokussiert) */
+  --tvdeck-fill-2: rgba(120, 120, 128, 0.2);     /* Zeilen, Karten */
+  --tvdeck-fill-3: rgba(120, 120, 128, 0.12);    /* sehr dezente Flächen */
+
+  --tvdeck-red: #ff453a;
+  --tvdeck-orange: #ff9f0a;
+  --tvdeck-yellow: #ffd60a;
+  --tvdeck-green: #30d158;
+  --tvdeck-blue: #0a84ff;
+
+  /* Farbwähler aus theme.json (mit Fallback) */
+  --tvdeck-tint: var(--tvdeck-accent, #0a84ff);
+  --tvdeck-switch: var(--tvdeck-switch-on, #30d158);
+
+  /* ---- Hintergrund ------------------------------------------------------ */
+  --tvdeck-wallpaper: radial-gradient(120% 85% at 50% -12%, #3a3a3e 0%, #1c1c1f 34%, #0a0a0b 68%, #000 100%);
+  --tvdeck-wallpaper-base: #000;
+
+  /* ---- Glas / Materialien ------------------------------------------------ */
+  --tvdeck-blur: 34px;
+  --tvdeck-backdrop: blur(var(--tvdeck-blur)) saturate(185%);
+  --tvdeck-glass: rgba(52, 52, 58, 0.5);          /* im selben Fenster, mit Blur */
+  --tvdeck-glass-thick: rgba(34, 34, 38, 0.74);
+  /* Overlay-Fenster (QAM, Menü, Toasts) können den Hintergrund nicht
+     weichzeichnen – deckend, sonst scheint Text scharf als „Geist“ durch */
+  --tvdeck-glass-solid: rgb(28, 28, 31);
+  --tvdeck-glass-edge: inset 0 1px 0 rgba(255, 255, 255, 0.16), inset 0 0 0 1px rgba(255, 255, 255, 0.07);
+  --tvdeck-glass-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0) 42%);
+  --tvdeck-panel-shadow: 0 28px 70px -14px rgba(0, 0, 0, 0.62), 0 8px 22px rgba(0, 0, 0, 0.32);
+
+  /* ---- Fokus (das Herz des Apple-TV-Looks) ------------------------------ */
+  --tvdeck-focus-bg: #ffffff;
+  --tvdeck-focus-fg: #1c1c1e;
+  --tvdeck-focus-fg-2: rgba(28, 28, 30, 0.6);
+  --tvdeck-focus-scale: 1.06;     /* Buttons, Tabs, Menüeinträge */
+  --tvdeck-row-scale: 1.015;      /* breite Listenzeilen */
+  --tvdeck-card-scale: 1.1;       /* Spiele-Kacheln */
+  --tvdeck-card-scale-wide: 1.05; /* breite Kacheln (erste Kachel der Startseite) */
+  --tvdeck-focus-shadow: 0 14px 28px -6px rgba(0, 0, 0, 0.55), 0 4px 10px rgba(0, 0, 0, 0.28);
+  --tvdeck-card-shadow: 0 30px 42px -12px rgba(0, 0, 0, 0.78), 0 12px 20px rgba(0, 0, 0, 0.36);
+  --tvdeck-card-rest-shadow: 0 8px 18px -6px rgba(0, 0, 0, 0.6);
+  --tvdeck-parallax: tvdeck-parallax 6.4s ease-in-out var(--tvdeck-dur) infinite;
+  --tvdeck-parallax-wide: tvdeck-parallax-soft 6.4s ease-in-out var(--tvdeck-dur) infinite;
+  --tvdeck-gloss: 1;
+
+  /* ---- Bewegung --------------------------------------------------------- */
+  --tvdeck-dur: 0.3s;
+  --tvdeck-spring: cubic-bezier(0.25, 1.3, 0.4, 1);
+  --tvdeck-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* ---- Formen ----------------------------------------------------------- */
+  --tvdeck-r-xs: 8px;
+  --tvdeck-r-s: 12px;
+  --tvdeck-r-m: 16px;
+  --tvdeck-r-l: 22px;
+  --tvdeck-r-xl: 28px;
+  --tvdeck-r-pill: 999px;
+  --tvdeck-card-r: 12px;
+}
+
+/* --------------------------------------------------------------------------
+   Animationen
+   -------------------------------------------------------------------------- */
+
+/* Leichtes „Schweben“ der fokussierten Kachel – wie der Parallax-Effekt der
+   Siri Remote, nur automatisch. Startet erst nach der Fokus-Animation. */
+@keyframes tvdeck-parallax {
+  0%   { transform: perspective(900px) rotateX(0deg) rotateY(0deg) scale(var(--tvdeck-card-scale)); }
+  25%  { transform: perspective(900px) rotateX(2.2deg) rotateY(-3deg) scale(var(--tvdeck-card-scale)); }
+  75%  { transform: perspective(900px) rotateX(-1.6deg) rotateY(3deg) scale(var(--tvdeck-card-scale)); }
+  100% { transform: perspective(900px) rotateX(0deg) rotateY(0deg) scale(var(--tvdeck-card-scale)); }
+}
+
+/* Halbe Neigung für breite Kacheln – sonst wirkt die Perspektive zu stark */
+@keyframes tvdeck-parallax-soft {
+  0%   { transform: perspective(1400px) rotateX(0deg) rotateY(0deg) scale(var(--tvdeck-card-scale)); }
+  25%  { transform: perspective(1400px) rotateX(1.2deg) rotateY(-1.4deg) scale(var(--tvdeck-card-scale)); }
+  75%  { transform: perspective(1400px) rotateX(-0.9deg) rotateY(1.4deg) scale(var(--tvdeck-card-scale)); }
+  100% { transform: perspective(1400px) rotateX(0deg) rotateY(0deg) scale(var(--tvdeck-card-scale)); }
+}
+
+/* Lichtreflex, der synchron zur Parallax-Bewegung über die Kachel wandert */
+@keyframes tvdeck-glare {
+  0%   { background-position: 50% 0%; }
+  25%  { background-position: 18% 8%; }
+  75%  { background-position: 82% 4%; }
+  100% { background-position: 50% 0%; }
+}
+
+@keyframes tvdeck-pop {
+  from { transform: scale(0.96); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+@keyframes tvdeck-slide-up {
+  from { transform: translateY(14px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+/* Bewegung reduzieren: Steam-Einstellung „Bewegung reduzieren“ / Low-Perf */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --tvdeck-parallax: none;
+    --tvdeck-parallax-wide: none;
+    --tvdeck-dur: 0.12s;
+    --tvdeck-spring: ease-out;
+  }
+}

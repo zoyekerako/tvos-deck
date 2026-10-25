@@ -1,0 +1,138 @@
+/* ==========================================================================
+   tvOS Deck – Startseite (Top Shelf) & Spiele-Kacheln (nur Big Picture)
+   Tipp: Steam → Einstellungen → Anpassung → Startseite → „Große Grafik“
+   aktivieren – das ergibt das echte Apple-TV-Top-Shelf-Layout.
+   ========================================================================== */
+
+/* ---- Hintergrund ------------------------------------------------------- */
+.gamepadui_BasicHome.gamepadui_OpaqueBackground,
+.gamepadui_BasicHome.gamepadui_TrueBlackBackground {
+  background: var(--tvdeck-wallpaper);
+  background-color: var(--tvdeck-wallpaper-base);
+}
+
+.gamepadhome_TabbedContent {
+  background: transparent;
+}
+
+/* ---- Spiele-Kacheln (Startseite + Bibliothek) -------------------------- */
+/* Klassen doppelt = höhere Spezifität ohne !important, damit die
+   Parallax-Animation den Transform weiterhin steuern darf. */
+.BasicUI .appportrait_LibraryItemBox.appportrait_LibraryItemBox {
+  border-radius: var(--tvdeck-card-r);
+  overflow: hidden;
+  filter: none;
+  outline: none;
+  box-shadow: var(--tvdeck-card-rest-shadow);
+  transform: perspective(900px) rotateX(0deg) rotateY(0deg) scale(1);
+  transition: transform var(--tvdeck-dur) var(--tvdeck-spring), box-shadow var(--tvdeck-dur) var(--tvdeck-ease);
+}
+
+.BasicUI .appportrait_LibraryItemBox.appportrait_LibraryItemBox.Focusable:focus,
+.BasicUI .appportrait_LibraryItemBox.appportrait_LibraryItemBox.gpfocus {
+  outline: none !important;
+  filter: none;
+  transform: perspective(900px) rotateX(0deg) rotateY(0deg) scale(var(--tvdeck-card-scale));
+  box-shadow: var(--tvdeck-card-shadow);
+  animation: var(--tvdeck-parallax) !important;
+  z-index: 12;
+}
+
+/* Lichtreflex statt Steams Glanz-Streifen */
+.BasicUI .appportrait_LibraryItemBox.appportrait_LibraryItemBox::after {
+  background: radial-gradient(120% 70% at 50% 0%, rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0.1) 36%, rgba(255, 255, 255, 0) 62%);
+  background-size: 220% 220%;
+  border-radius: inherit;
+  mix-blend-mode: soft-light;
+  opacity: 0 !important;
+  animation: none !important;
+  transition: opacity 0.3s ease;
+}
+
+.BasicUI .appportrait_LibraryItemBox.appportrait_LibraryItemBox.Focusable:focus::after,
+.BasicUI .appportrait_LibraryItemBox.appportrait_LibraryItemBox.gpfocus::after {
+  opacity: var(--tvdeck-gloss) !important;
+  animation: tvdeck-glare 6.4s ease-in-out var(--tvdeck-dur) infinite !important;
+}
+
+/* Die große erste Kachel liegt am Rand des Karussells: nach rechts wachsen,
+   sonst schneidet Steams Scroll-Container sie beim Vergrößern ab. */
+.basicgamecarousel_Featured .appportrait_LibraryItemBox.appportrait_LibraryItemBox {
+  --tvdeck-card-scale: var(--tvdeck-card-scale-wide);
+  transform-origin: 6% 50%;
+}
+
+.basicgamecarousel_Featured .appportrait_LibraryItemBox.appportrait_LibraryItemBox.Focusable:focus,
+.basicgamecarousel_Featured .appportrait_LibraryItemBox.appportrait_LibraryItemBox.gpfocus {
+  animation: var(--tvdeck-parallax-wide) !important;
+}
+
+.LowPerfMode .appportrait_LibraryItemBox.appportrait_LibraryItemBox.gpfocus,
+.LowPerfMode .appportrait_LibraryItemBox.appportrait_LibraryItemBox.gpfocus::after {
+  animation: none !important;
+}
+
+.BasicUI .appportrait_LibraryItemBoxSubscript {
+  border-radius: 0 0 var(--tvdeck-r-xs) var(--tvdeck-r-xs);
+  font-weight: 600;
+}
+
+.BasicUI .libraryassetimage_GreyBackground {
+  background-color: #1c1c1e;
+}
+
+/* ---- Top Shelf ---------------------------------------------------------- */
+/* Hintergrundbild hell und ruhig wie bei Apple TV (kein Schwenk, kein Abdunkeln) */
+.gamepadhomerecentgames_RecentGamesBackgroundImage {
+  opacity: 1 !important;
+  filter: brightness(0.94) saturate(1.06) !important;
+}
+
+.gamepadhomerecentgames_RecentGamesBackgroundImages .gamepadhomerecentgames_RecentGamesBackground {
+  animation: none !important;
+}
+
+.gamepadhomerecentgames_RecentGamesBackgroundContainer,
+.gamepadhomerecentgames_RecentGamesBackgroundImages {
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 48%, rgba(0, 0, 0, 0.55) 74%, rgba(0, 0, 0, 0) 100%) !important;
+}
+
+/* Ohne „Große Grafik“: Karussell tiefer setzen, damit die Grafik oben wirkt */
+.gamepadhome_BackstackRootTest:not(.BigArtMode) .gamepadhomerecentgames_RecentGamesContainer {
+  padding-top: clamp(54px, 24vh, 210px);
+}
+
+/* Kein farbiges Leuchten unter der Kachel – Apple nutzt nur Schatten */
+.basicgamecarousel_CarouselCapsuleBackgroundGlow {
+  display: none;
+}
+
+.gamepadhomerecentgames_RecentGamesHeaderLabel {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.55);
+}
+
+/* Spielname unter der fokussierten Kachel (wie App-Namen auf Apple TV) */
+.basicgamecarousel_CarouselGameLabel {
+  margin-left: 2px !important;
+  font-size: 17px;
+  color: var(--tvdeck-label);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+}
+
+.basicgamecarousel_SubMessage {
+  color: var(--tvdeck-label-2) !important;
+  font-weight: 500;
+}
+
+.basicgamecarousel_TextBoxCarouselContents {
+  background: var(--tvdeck-glass) !important;
+  backdrop-filter: var(--tvdeck-backdrop);
+  border-radius: var(--tvdeck-card-r);
+  box-shadow: var(--tvdeck-glass-edge);
+}

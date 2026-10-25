@@ -1,0 +1,88 @@
+/* ==========================================================================
+   tvOS Deck – Bildschirmtastatur
+   Steam stellt die Tastenfarben als CSS-Variablen bereit (.DefaultTheme).
+   Form und Fokus-Anhebung setzen wir direkt auf die Tasten.
+   Hinweis: Punkte-Shop-Tastaturen (Pumpkin, Grape …) bleiben unverändert.
+   ========================================================================== */
+
+.virtualkeyboard_Keyboard.DefaultTheme {
+  --background-color: linear-gradient(180deg, rgba(40, 40, 44, 0.94) 0%, rgba(22, 22, 25, 0.96) 100%);
+  --foreground-color: #ffffff;
+
+  --key-background-color: rgba(255, 255, 255, 0.1);
+  --key-color: #ffffff;
+  --key-focused-background-color: #ffffff;
+  --key-focused-color: #1c1c1e;
+  --key-touched-background-color: #ffffff;
+  --key-touched-color: #1c1c1e;
+
+  --key-shift-label-color: rgba(235, 235, 245, 0.45);
+  --key-focused-shift-label-color: rgba(28, 28, 30, 0.55);
+
+  --key-meta-background-color: rgba(255, 255, 255, 0.18);
+  --key-tab-background-color: rgba(255, 255, 255, 0.18);
+  --key-caps-background-color: rgba(255, 255, 255, 0.18);
+  --key-shift-background-color: rgba(255, 255, 255, 0.18);
+  --key-backspace-background-color: rgba(255, 255, 255, 0.18);
+  --key-enter-background-color: rgba(255, 255, 255, 0.26);
+  --key-spacebar-background-color: rgba(255, 255, 255, 0.1);
+  --key-spacer-background-color: transparent;
+
+  --key-action-button-glyph-color: rgba(235, 235, 245, 0.62);
+  --key-enter-action-button-glyph-color: #1c1c1e;
+
+  --key-toggleon-background-color: #ffffff;
+  --key-toggleon-color: #1c1c1e;
+  --key-toggleoneshot-color: var(--tvdeck-tint);
+
+  --key-extendedkey-background-color: rgba(58, 58, 62, 0.98);
+  --key-extendedkey-color: #ffffff;
+  --key-extendedkey-focused-background-color: #ffffff;
+  --key-extendedkey-focused-color: #1c1c1e;
+  --key-extendedkey-hover-background-color: #ffffff;
+  --key-extendedkey-hover-color: #1c1c1e;
+
+  --key-emoji-category-highlight-background-color: rgba(255, 255, 255, 0.18);
+  --key-emoji-focused-background-color: #ffffff;
+  --key-emoji-focused-color: #1c1c1e;
+
+  --key-pointer-background-color: var(--tvdeck-tint);
+  --key-deadkey-background-color: rgba(255, 255, 255, 0.18);
+  --key-deadkeyactive-color: var(--tvdeck-tint);
+
+  backdrop-filter: var(--tvdeck-backdrop);
+  border-radius: var(--tvdeck-r-xl) var(--tvdeck-r-xl) 0 0;
+  box-shadow: 0 -18px 50px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.virtualkeyboard_Keyboard.DefaultTheme .virtualkeyboard_KeyboardKey {
+  border-radius: 10px;
+  border: none;
+  box-shadow: none !important;
+  font-weight: 500;
+  transition: transform 0.22s var(--tvdeck-spring), background-color 0.1s ease, color 0.1s ease;
+}
+
+/* Fokussierte Taste hebt sich weiß ab – wie auf der tvOS-Tastatur */
+.virtualkeyboard_Keyboard.DefaultTheme .virtualkeyboard_KeyboardKey.virtualkeyboard_Focused {
+  transform: scale(1.14);
+  box-shadow: 0 10px 20px -4px rgba(0, 0, 0, 0.6) !important;
+  z-index: 3;
+}
+
+.virtualkeyboard_Keyboard.DefaultTheme .virtualkeyboard_KeyboardKey.virtualkeyboard_Touched {
+  background-color: #ffffff !important;
+  color: #1c1c1e !important;
+  transform: scale(0.95);
+}
+
+.virtualkeyboard_Keyboard.DefaultTheme .virtualkeyboard_KeyboardKey.virtualkeyboard_Touched::after {
+  border-radius: 10px;
+  mix-blend-mode: normal;
+  background: rgba(255, 255, 255, 0.25) !important;
+}
+
+.virtualkeyboard_Keyboard.DefaultTheme .virtualkeyboard_KeyboardKey.virtualkeyboard_Focused img,
+.virtualkeyboard_Keyboard.DefaultTheme .virtualkeyboard_KeyboardKey.virtualkeyboard_Touched img {
+  filter: brightness(0.15);
+}

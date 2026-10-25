@@ -1,0 +1,28 @@
+name: Release
+
+# Tag pushen, z. B. `git tag v1.1.0 && git push origin v1.1.0` –
+# der Tag muss zur "version" in tvOS-Deck/theme.json passen.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Lint and package
+        run: python3 tools/package_theme.py
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" release/*.zip --title "tvOS Deck $GITHUB_REF_NAME" --generate-notes

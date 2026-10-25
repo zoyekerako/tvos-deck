@@ -1,0 +1,9 @@
+/* tvOS Deck – Option „Fußleiste: Ausblenden“
+   Apple TV zeigt keine Tastenhinweise. Die Fußleiste ist nicht fokussierbar,
+   Ausblenden ist daher sicher (nur Touch-Klicks auf die Hinweise entfallen).
+   Bei eingeblendeter Bildschirmtastatur bleibt sie sichtbar. */
+
+.footer_BasicFooter:not(.footer_WithKeyboard):not(.footer_QuickAccessFooter) {
+  opacity: 0;
+  pointer-events: none;
+}

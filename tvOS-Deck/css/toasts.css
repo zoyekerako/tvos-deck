@@ -1,0 +1,52 @@
+/* ==========================================================================
+   tvOS Deck – Benachrichtigungen (Toasts) – alle Fenster
+   Vorbild: die abgerundeten Glas-Banner von tvOS.
+   ========================================================================== */
+
+.shorttemplates_ShortTemplate {
+  background: var(--tvdeck-glass-sheen), var(--tvdeck-glass-solid) !important;
+  border-radius: var(--tvdeck-r-m);
+  overflow: hidden;
+  box-shadow: var(--tvdeck-panel-shadow), var(--tvdeck-glass-edge);
+}
+
+.shorttemplates_ShortTemplate:hover {
+  background: var(--tvdeck-glass-sheen), var(--tvdeck-glass-thick) !important;
+}
+
+.shorttemplates_ShortTemplate .shorttemplates_ShortLogoDimensions {
+  border-radius: var(--tvdeck-r-s);
+  overflow: hidden;
+  margin-left: 4px;
+  transform: scale(0.85);
+}
+
+.shorttemplates_ShortTemplate .shorttemplates_Title {
+  color: var(--tvdeck-label-2);
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.shorttemplates_ShortTemplate .shorttemplates_Body {
+  color: var(--tvdeck-label) !important;
+  font-weight: 500;
+}
+
+.shorttemplates_ShortTemplate .shorttemplates_Count {
+  background-color: var(--tvdeck-tint);
+}
+
+.standardtemplates_StandardTemplate,
+.notificationcontent_StandardTemplate,
+.notificationcontent_PinnedTemplate {
+  border-radius: var(--tvdeck-r-m);
+  overflow: hidden;
+}
+
+.standardtemplates_StandardTemplate .standardtemplates_Title {
+  font-weight: 600;
+}
+
+.standardtemplates_NewIndicator {
+  background-color: var(--tvdeck-tint);
+}

@@ -1,0 +1,188 @@
+{
+  "name": "tvOS Deck",
+  "version": "1.1.0",
+  "manifest_version": 9,
+  "target": "System-Wide",
+  "description": "Apple TV / tvOS look for SteamOS Game Mode – Steam Deck, Steam Machine (16:9, 4K) and Big Picture. White tvOS focus with parallax tilt and light glare, glass panels, an SF-like font (Inter, OFL), a Top Shelf home screen, a sidebar Steam menu and a Control-Center-style Quick Access menu. Every option is adjustable: focus effect, background, font, footer, keyboard styling, reduce transparency and colors. Tip: turn on Settings > Customization > Home > Big Art Mode for the real Top Shelf layout. Unofficial fan theme, not affiliated with Apple or Valve.",
+  "tabs": {
+    "all": [
+      "SP",
+      "QuickAccess",
+      "MainMenu",
+      "notificationtoasts.*"
+    ],
+    "sp": [
+      "SP"
+    ],
+    "menu": [
+      "MainMenu"
+    ],
+    "qam": [
+      "QuickAccess"
+    ],
+    "default": [
+      "all"
+    ]
+  },
+  "inject": {
+    "css/tokens.css": [],
+    "css/controls.css": [],
+    "css/toasts.css": [],
+    "css/shell.css": [
+      "sp"
+    ],
+    "css/home.css": [
+      "sp"
+    ],
+    "css/game.css": [
+      "sp"
+    ],
+    "css/settings.css": [
+      "sp"
+    ],
+    "css/mainmenu.css": [
+      "menu"
+    ],
+    "css/qam.css": [
+      "qam"
+    ]
+  },
+  "patches": {
+    "Focus Effect": {
+      "type": "dropdown",
+      "default": "Apple TV (Parallax)",
+      "values": {
+        "Apple TV (Parallax)": {},
+        "Subtle": {
+          "--tvdeck-card-scale": [
+            "1.05"
+          ],
+          "--tvdeck-focus-scale": [
+            "1.03"
+          ],
+          "--tvdeck-parallax": [
+            "none"
+          ],
+          "--tvdeck-gloss": [
+            "0.5"
+          ],
+          "--tvdeck-card-scale-wide": [
+            "1.025"
+          ],
+          "--tvdeck-parallax-wide": [
+            "none"
+          ]
+        },
+        "Off": {
+          "--tvdeck-card-scale": [
+            "1"
+          ],
+          "--tvdeck-focus-scale": [
+            "1"
+          ],
+          "--tvdeck-row-scale": [
+            "1"
+          ],
+          "--tvdeck-parallax": [
+            "none"
+          ],
+          "--tvdeck-gloss": [
+            "0"
+          ],
+          "--tvdeck-card-scale-wide": [
+            "1"
+          ],
+          "--tvdeck-parallax-wide": [
+            "none"
+          ]
+        }
+      }
+    },
+    "Background": {
+      "type": "dropdown",
+      "default": "Graphite",
+      "values": {
+        "Graphite": {},
+        "Black (OLED)": {
+          "--tvdeck-wallpaper": [
+            "#000"
+          ]
+        },
+        "Aurora (tvOS 26)": {
+          "--tvdeck-wallpaper": [
+            "radial-gradient(60% 50% at 12% 8%, rgba(94, 92, 230, 0.42), rgba(94, 92, 230, 0) 70%), radial-gradient(55% 45% at 88% 18%, rgba(10, 132, 255, 0.32), rgba(10, 132, 255, 0) 70%), radial-gradient(70% 60% at 50% 112%, rgba(48, 209, 88, 0.16), rgba(48, 209, 88, 0) 70%), #05060a"
+          ]
+        }
+      }
+    },
+    "Font": {
+      "type": "dropdown",
+      "default": "SF Pro / Inter",
+      "values": {
+        "SF Pro / Inter": {
+          "css/font.css": []
+        },
+        "Steam (Motiva Sans)": {}
+      }
+    },
+    "Footer": {
+      "type": "dropdown",
+      "default": "Minimal",
+      "values": {
+        "Minimal": {
+          "css/options/footer-minimal.css": []
+        },
+        "Hidden": {
+          "css/options/footer-minimal.css": [],
+          "css/options/footer-hidden.css": []
+        },
+        "Steam Default": {}
+      }
+    },
+    "Keyboard Styling": {
+      "type": "checkbox",
+      "default": "Yes",
+      "values": {
+        "No": {},
+        "Yes": {
+          "css/keyboard.css": []
+        }
+      }
+    },
+    "Reduce Transparency": {
+      "type": "checkbox",
+      "default": "No",
+      "values": {
+        "No": {},
+        "Yes": {
+          "css/options/reduce-transparency.css": []
+        }
+      }
+    },
+    "Colors": {
+      "type": "none",
+      "default": "Standard",
+      "values": {
+        "Standard": {}
+      },
+      "components": [
+        {
+          "name": "Accent Color",
+          "type": "color-picker",
+          "on": "Standard",
+          "default": "#0A84FF",
+          "css_variable": "tvdeck-accent",
+          "tabs": []
+        },
+        {
+          "name": "Toggle Color",
+          "type": "color-picker",
+          "on": "Standard",
+          "default": "#30D158",
+          "css_variable": "tvdeck-switch-on",
+          "tabs": []
+        }
+      ]
+    }
+  }
+}

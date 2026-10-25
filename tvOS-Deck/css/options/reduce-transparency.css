@@ -1,0 +1,24 @@
+/* tvOS Deck – Option „Transparenz reduzieren“
+   Wie die gleichnamige Bedienungshilfe in tvOS: deckende Flächen statt Glas,
+   kein Hintergrund-Blur. Spart außerdem GPU-Leistung und Akku. */
+
+:root {
+  --tvdeck-blur: 0px;
+  --tvdeck-backdrop: none;
+  --tvdeck-glass: rgb(44, 44, 48);
+  --tvdeck-glass-thick: rgb(36, 36, 40);
+  --tvdeck-glass-solid: rgb(30, 30, 33);
+  --tvdeck-glass-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0) 40%);
+}
+
+.gamepadui_GamepadDialogOverlay .ModalOverlayBackground {
+  background: rgba(0, 0, 0, 0.78) !important;
+  backdrop-filter: none !important;
+}
+
+.header_VolumePopin,
+.gamepadtabbedpage_SortAndFilterContainer,
+.gamepadcontextmenu_contextMenuContents,
+.gamepadcontextmenu_contextMenu {
+  backdrop-filter: none !important;
+}

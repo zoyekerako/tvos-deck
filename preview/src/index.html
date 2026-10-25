@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>tvOS Deck – Vorschau</title>
+<link rel="stylesheet" href="app.css">
+<script src="theme-data.js"></script>
+</head>
+<body>
+<header class="app-top">
+  <div class="app-brand">
+    <span class="app-logo" aria-hidden="true"></span>
+    <div>
+      <div class="app-title">tvOS Deck <span id="theme-version"></span></div>
+      <div class="app-sub" id="build-info">Vorschau mit echtem Steam-CSS</div>
+    </div>
+  </div>
+  <div class="app-hint">
+    <kbd>←</kbd><kbd>↑</kbd><kbd>↓</kbd><kbd>→</kbd> Steuerkreuz · <kbd>Enter</kbd> A-Taste · Klick = Touch
+  </div>
+</header>
+
+<div class="app-main">
+  <nav class="app-screens" id="screens" aria-label="Bildschirme"></nav>
+
+  <main class="app-stage-wrap" id="stage-wrap">
+    <div class="app-device" id="device">
+      <div class="app-stage" id="stage"></div>
+    </div>
+  </main>
+
+  <aside class="app-options" aria-label="Theme-Optionen">
+    <h2>CSS-Loader-Optionen</h2>
+    <div id="options"></div>
+    <h2>Vorschau</h2>
+    <div id="preview-options"></div>
+    <p class="app-note">Klassen werden exakt wie von CSS Loader übersetzt. Steam-Code und -CSS stammen aus dem aktuellen
+      Steam-Deck-Stable-Build; Abstände der nachgebauten Seiten sind angenähert.</p>
+  </aside>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+/* ==========================================================================
+   tvOS Deck – Einstellungen (nur Big Picture)
+   Vorbild: tvOS-Einstellungen – links die Kategorien als Pillen,
+   rechts die Zeilen, die beim Fokus weiß werden (siehe controls.css).
+   ========================================================================== */
+
+.gamepadpagedsettings_PagedSettingsDialog {
+  background: var(--tvdeck-wallpaper);
+  background-color: var(--tvdeck-wallpaper-base);
+}
+
+.gamepadpagedsettings_PagedSettingDialog_ContentColumn {
+  background: transparent;
+}
+
+/* Linke Spalte */
+.gamepadpagedsettings_PagedSettingsDialog_PageListColumn {
+  background: transparent;
+}
+
+.gamepadpagedsettings_PagedSettingsDialog_Title {
+  font-size: 26px;
+  line-height: 32px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  color: var(--tvdeck-label);
+}
+
+.gamepadpagedsettings_PagedSettingsDialog_PageListItem {
+  margin: 2px 12px;
+  padding: 10px 14px;
+  border-radius: var(--tvdeck-r-m);
+  border: none !important;
+  border-left: none !important;
+  background: transparent !important;
+  color: var(--tvdeck-label-2) !important;
+  font-weight: 500 !important;
+  transform-origin: 50% 50%;
+  animation: none;
+  transition: transform var(--tvdeck-dur) var(--tvdeck-spring), background-color 0.15s ease,
+    box-shadow var(--tvdeck-dur) var(--tvdeck-ease);
+}
+
+/* Steam skaliert nur die Kinder – wir heben die ganze Pille an */
+.gamepadpagedsettings_PagedSettingsDialog_PageListItem ._4hESt2MY_ScaledChildren {
+  transform: none !important;
+}
+
+.gamepadpagedsettings_PagedSettingsDialog_PageListItem.gamepadpagedsettings_Active {
+  background: rgba(255, 255, 255, 0.14) !important;
+  color: var(--tvdeck-label) !important;
+  font-weight: 600 !important;
+}
+
+.gamepadpagedsettings_PagedSettingsDialog_PageListItem:focus,
+.gamepadpagedsettings_PagedSettingsDialog_PageListItem.gpfocus {
+  background: var(--tvdeck-focus-bg) !important;
+  color: var(--tvdeck-focus-fg) !important;
+  font-weight: 600 !important;
+  transform: scale(var(--tvdeck-focus-scale));
+  box-shadow: var(--tvdeck-focus-shadow);
+}
+
+.gamepadpagedsettings_PagedSettingsDialog_PageListItem:hover:not(:focus) {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.gamepadpagedsettings_PageListItem_Icon,
+.gamepadpagedsettings_PageListItem_Icon svg {
+  color: inherit !important;
+}
+
+.gamepadpagedsettings_Separator {
+  background: var(--tvdeck-separator);
+  margin: 10px 26px;
+}
+
+/* Rechte Seite: Überschriften im tvOS-Stil */
+.gamepadpagedsettings_PagedSettingsDialog_PageContent .DialogHeader {
+  text-transform: none !important;
+  letter-spacing: -0.02em !important;
+  font-size: 26px !important;
+  line-height: 32px !important;
+  font-weight: 700 !important;
+  color: var(--tvdeck-label) !important;
+}
+
+.gamepadpagedsettings_PagedSettingsDialog_PageContent .DialogControlsSectionHeader {
+  color: var(--tvdeck-label-2) !important;
+  border-bottom: none !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+.gamepadpagedsettings_PagedSettingsDialog_PageContent .DialogBodyText {
+  color: var(--tvdeck-label-2) !important;
+}
+
+/* Andere Vollbild-Seiten (z. B. Controller-Einstellungen) */
+.gamepadpage_GamepadPage.gamepadpage_DialogBackground {
+  background: var(--tvdeck-wallpaper);
+  background-color: var(--tvdeck-wallpaper-base);
+}

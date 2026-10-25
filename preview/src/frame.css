@@ -1,0 +1,282 @@
+/* Vorschau-Hilfsstile für die nachgebauten Steam-Fenster.
+   Nur Layout, das Steam sonst per JavaScript/Inline-Styles setzt.
+   Klassen mit „pv-“ gibt es nur in der Vorschau. */
+
+:root {
+  /* gleiches Farbschema wie die Vorschau-Seite, sonst malt Chrome
+     transparente Overlay-Fenster (Menü, QAM, Toast) deckend weiß */
+  color-scheme: dark;
+  --basicui-header-height: 40px;
+  --gamepadui-current-footer-height: 40px;
+  --gamepadui-header-background-opacity: 0;
+  --indent-level: 0;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.pv-body {
+  background: #000;
+  color: #dcdedf;
+  font-family: "Motiva Sans", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.pv-body.pv-transparent {
+  background: transparent;
+}
+
+.pv-root {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.pv-content {
+  position: relative;
+}
+
+.pv-fill {
+  position: absolute;
+  inset: 0;
+}
+
+.pv-grow {
+  flex: 1;
+  min-width: 0;
+}
+
+.pv-vscroll::-webkit-scrollbar,
+.pv-hscroll::-webkit-scrollbar {
+  display: none;
+}
+
+.Focusable {
+  outline: none;
+  cursor: pointer;
+}
+
+.pv-header-title {
+  margin-right: auto;
+  padding-left: 2.8vw;
+}
+
+.pv-legend {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 18px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.pv-glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 5px;
+  box-sizing: border-box;
+  border-radius: 11px;
+  background: #fff;
+  color: #0e141b;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.pv-labelstack {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 16px;
+}
+
+.pv-tabbedcontent {
+  height: auto !important;
+  margin-top: 0 !important;
+}
+
+.pv-grid {
+  display: grid;
+  gap: 20px 16px;
+  justify-content: center;
+  padding: 6px 0 70px;
+}
+
+.pv-cell {
+  display: flex;
+  justify-content: center;
+}
+
+.pv-shelf {
+  display: flex;
+  gap: 16px;
+  padding: 6px 2px 40px;
+}
+
+.pv-section {
+  display: block;
+  margin: 0 0 12px !important;
+}
+
+.pv-section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.pv-section-text {
+  font-size: 14px;
+  color: #b8bcbf;
+}
+
+.pv-playbutton {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 100%;
+  min-width: 190px;
+  padding: 0 28px;
+  box-sizing: border-box;
+}
+
+.pv-dropdown {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 220px;
+}
+
+.pv-sliderrow {
+  display: flex;
+  align-items: center;
+}
+
+.pv-settings-title {
+  padding: 0 24px 18px;
+}
+
+.pv-settings-content {
+  position: relative;
+  flex: 3;
+}
+
+.pv-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+}
+
+.pv-dialog-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 26px;
+}
+
+.pv-keyboard-host {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 40px; /* Steam: Tastatur über der Fußleiste */
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+}
+
+.pv-kbrow {
+  display: flex;
+}
+
+.pv-search {
+  display: flex;
+  justify-content: center;
+  padding-top: 64px;
+}
+
+.pv-search-inner {
+  width: 720px;
+}
+
+.pv-search-title {
+  margin-bottom: 14px;
+}
+
+.pv-search-inner input {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 20px;
+  padding: 12px 16px;
+}
+
+.pv-search-results {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.pv-ingame {
+  display: none !important;
+}
+
+html.pv-ingame-on .pv-ingame {
+  display: flex !important;
+}
+
+.pv-navcolumn {
+  width: 280px;
+  padding: 14px 0;
+}
+
+.pv-navcolumn img {
+  display: block;
+  max-width: 220px;
+  margin: 8px 24px 18px;
+}
+
+.pv-navitem {
+  position: relative;
+  padding: 12px 22px;
+  font-size: 16px;
+}
+
+.pv-appcolumn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 18px;
+}
+
+.pv-battery {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 4px 0 10px;
+}
+
+.pv-batterydetails {
+  font-size: 13px;
+}
+
+.pv-toastplace {
+  right: 0 !important;
+  bottom: 0 !important;
+}
+
+.pv-marquee {
+  white-space: nowrap;
+}
