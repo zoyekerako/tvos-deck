@@ -19,7 +19,6 @@ html,
 body,
 body * {
   font-family: var(--tvdeck-font) !important;
-  font-optical-sizing: auto;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }

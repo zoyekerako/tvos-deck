@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "manifest_version": 9,
   "target": "System-Wide",
-  "description": "Apple TV / tvOS look for SteamOS Game Mode – Steam Deck, Steam Machine (16:9, 4K) and Big Picture. White tvOS focus with parallax tilt and light glare, glass panels, an SF-like font (Inter, OFL), a Top Shelf home screen, a sidebar Steam menu and a Control-Center-style Quick Access menu. Every option is adjustable: focus effect, background, font, footer, keyboard styling, reduce transparency and colors. Tip: turn on Settings > Customization > Home > Big Art Mode for the real Top Shelf layout. Unofficial fan theme, not affiliated with Apple or Valve.",
+  "description": "Turn SteamOS Game Mode into Apple TV. Made for the Steam Machine on a TV (16:9, sharp at 4K), also works on Steam Deck and in Big Picture.\n\n• tvOS focus: the selected item turns white and lifts with a soft shadow, no blue outline\n• Game tiles with rounded corners, zoom, parallax tilt and a moving light glare\n• Top Shelf home screen with big hero art\n• Steam menu as a floating sidebar, Quick Access as a Control Center panel\n• White Play button, round glass buttons, iOS toggles, Apple sliders, glass dialogs, tvOS keyboard and notifications\n• Inter font, SF Pro is used if installed\n\nOptions: focus effect, background (Graphite, OLED Black, Aurora), font, footer, keyboard styling, reduce transparency, accent and toggle color.\n\nTip: turn on Settings > Customization > Home > Big Art Mode for the real Top Shelf look.\n\nUnofficial fan theme, not affiliated with Apple or Valve. Source and bug reports: github.com/zoyekerako/tvos-deck",
   "tabs": {
     "all": [
       "SP",

@@ -28,6 +28,9 @@ VALID_TARGETS = ["System-Wide", "Keyboard", "Home", "Background", "Library", "St
                  "Media", "Downloads", "Settings", "Lock Screen", "Tweak", "Other", "Snippet", "Desktop",
                  "Desktop-Library", "Desktop-Tweak", "Desktop-Friends", "Desktop-Store"]
 MAX_SIZE = 10 * 1024 * 1024
+# DeckThemes prüft mit einem älteren W3C-Validator (Server-Build 2025-09) als --validate;
+# diese Eigenschaften kennt er noch nicht und lehnt die Einreichung ab
+UNKNOWN_TO_DECKTHEMES = re.compile(r"(?<![\w-])(font-optical-sizing)\s*:")
 # CSS Loader legt Einstellungen im Theme-Ordner ab – nie mit ausliefern
 EXCLUDE = re.compile(r"(^|/)(\.DS_Store|config_[A-Z]+\.json|__pycache__)(/|$)")
 
@@ -83,7 +86,10 @@ def lint() -> dict:
     for p, rel in theme_files():
         if rel.endswith(".css"):
             need(rel in referenced, f"'{rel}' wird in theme.json nicht verwendet")
-            need("\\" not in p.read_text(encoding="utf-8"), f"'{rel}': Backslash (CSS Loader verdoppelt ihn)")
+            text = p.read_text(encoding="utf-8")
+            need("\\" not in text, f"'{rel}': Backslash (CSS Loader verdoppelt ihn)")
+            for m in UNKNOWN_TO_DECKTHEMES.finditer(text):
+                need(False, f"'{rel}': '{m.group(1)}' lehnt der DeckThemes-Validator ab")
 
     size = sum(p.stat().st_size for p, _ in theme_files())
     need(size < MAX_SIZE, f"Theme ist {size / 1e6:.1f} MB (Limit 10 MB)")

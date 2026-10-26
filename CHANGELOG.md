@@ -3,7 +3,9 @@
 ## 1.1.0 – 2026-10-25
 
 - **Steam Machine / 16:9 / 4K:** checked at 1920 × 1080 logical pixels (4K at 200 % scaling); hairline separators
-  on high-DPI screens; wide first home tile now zooms less and tilts softer so it no longer covers its neighbour.
+  on high-DPI screens; wide first home tile zooms less and tilts softer, and the tiles next to it move aside
+  while it is focused instead of being covered.
+- Removed `font-optical-sizing` (the validator on DeckThemes does not know it yet; it was the default anyway).
 - Steam menu, Quick Access and toasts are now fully opaque glass (overlay windows cannot blur, text behind used
   to shine through).
 - Quick Access: focus tile no longer touches the panel edge.

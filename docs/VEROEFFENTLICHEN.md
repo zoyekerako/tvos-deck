@@ -56,6 +56,13 @@ Die Action *Release* baut daraus zwei ZIPs und hängt sie an das GitHub-Release:
    `06-settings.jpg` (je 1920 × 1080, unter 300 KB).
 5. Absenden. Ein Moderator prüft das Theme, danach erscheint es in CSS Loader unter *Find themes*.
 
+In der Liste deiner Einreichungen steht oben **„New Theme“**. Das ist die Art der Einreichung (neues Theme statt
+„Theme Update“), nicht der Name. Der Name kommt aus `theme.json`.
+
+**Validator-Fehler bei der Einreichung:** DeckThemes prüft mit einer älteren Version des W3C-Validators als
+`--validate`. Eigenschaften, die er nicht kennt, trägst du in `UNKNOWN_TO_DECKTHEMES` in
+`tools/package_theme.py` ein. Danach meldet schon `python3 tools/package_theme.py` den Fehler.
+
 **Echte Screenshots sind besser.** Die Bilder in `images/` stammen aus der Web-Vorschau mit Steams echtem CSS.
 Sie zeigen aber Beispiel-Spielgrafiken aus dem Steam-Shop. Mache auf der Steam Machine eigene Aufnahmen mit
 **Steam-Taste + R1** und nimm sie für die Einreichung, sobald das Theme dort so aussieht wie gewünscht.

@@ -68,6 +68,17 @@
   animation: var(--tvdeck-parallax-wide) !important;
 }
 
+/* Beim Wachsen würde sie die nächsten Kacheln überdecken: die rücken so weit
+   nach rechts, wie sie größer wird (0 bei Fokuseffekt „Off“). */
+.basicgamecarousel_BasicGameCarouselItem {
+  transition: transform var(--tvdeck-dur) var(--tvdeck-spring);
+}
+
+.basicgamecarousel_BasicGameCarouselItem:has(.basicgamecarousel_Featured .Focusable:focus) ~ .basicgamecarousel_BasicGameCarouselItem,
+.basicgamecarousel_BasicGameCarouselItem:has(.basicgamecarousel_Featured .gpfocus) ~ .basicgamecarousel_BasicGameCarouselItem {
+  transform: translateX(calc((var(--tvdeck-card-scale-wide) - 1) * 520px));
+}
+
 .LowPerfMode .appportrait_LibraryItemBox.appportrait_LibraryItemBox.gpfocus,
 .LowPerfMode .appportrait_LibraryItemBox.appportrait_LibraryItemBox.gpfocus::after {
   animation: none !important;
